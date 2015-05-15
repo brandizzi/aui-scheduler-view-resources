@@ -54,6 +54,34 @@
                             }
                         },
 
+                        plotEvent: function(evt) {
+                            var nodeList = evt.get('node');
+
+                            if (nodeList.size() < 2) {
+                                evt.addPaddingNode();
+                            }
+
+                            var node = evt.get('node').item(0);
+                            var paddingNode = evt.get('node').item(1);
+                            var shim = this.getColumnShimByResource(evt.get('resource'));
+
+                            if (shim) {
+                                shim.append(node);
+
+                                if (evt.get('visible')) {
+                                    node.show();
+                                }
+                            }
+                            else {
+                                node.hide();
+                            }
+
+                            evt.syncUI();
+
+                            this.syncEventTopUI(evt);
+                            this.syncEventHeightUI(evt);
+                        },
+
                         plotEvents: function() {
                             var scheduler = this.get('scheduler');
                             var filterFn = this.get('filterFn');
