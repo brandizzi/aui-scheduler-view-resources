@@ -26,6 +26,16 @@
                     },
 
                     prototype: {
+                        syncDaysHeaderUI: function() {
+                            var resources = this.get('resources');
+
+                            this.colHeaderDaysNode.all('a').each(
+                                function(columnNode, i) {
+                                    columnNode.html(resources[i]);
+                                }
+                            );
+                        },
+
                         _valueColumnCounter: function() {
                             return this.get('resources').length;
                         }
