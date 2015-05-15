@@ -35,6 +35,12 @@
                     },
 
                     prototype: {
+                        syncUI: function() {
+                            SchedulerResourceView.superclass.syncUI.apply(this, arguments);
+
+                            this.gridContainer.attr('colspan', this.get('resources').length);
+                        },
+
                         _valueColDaysNode: function() {
                             var buffer = [];
                             var colNumber = 0;
