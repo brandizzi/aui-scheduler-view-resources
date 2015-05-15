@@ -28,7 +28,11 @@
 
                 var date = new Date(2014, 11, 1);
                 var eventRecorder = new Y.SchedulerEventRecorder();
-                var resourceView = new SchedulerResourceView();
+                var resourceView = new SchedulerResourceView(
+                    {
+                        resources: ['John', 'Mary', 'Alfred']
+                    }
+                );
 
                 new Y.Scheduler(
                   {
