@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Resource stuff </title>
+        <link rel="stylesheet" href="http://cdn.alloyui.com/3.0.0/aui-css/css/bootstrap.min.css">
+        <script type="text/javascript" src="http://cdn.alloyui.com/3.0.0/aui/aui-min.js"></script>
+    </head>
+    <body>
+        <div id="myScheduler"></div>
+        <script type="text/javascript">
+            YUI().use(
+              'aui-scheduler',
+              function(Y) {
+                var date = new Date(2014, 11, 1);
+                var eventRecorder = new Y.SchedulerEventRecorder();
+                var dayView = new Y.SchedulerDayView();
+
+                new Y.Scheduler(
+                  {
+                    boundingBox: '#myScheduler',
+                    date: date,
+                    eventRecorder: eventRecorder,
+                    items: [
+                        {
+                            color: 'f0f',
+                            content: 'Meeting',
+                            startDate: new Date(2014, 11, 1, 11),
+                            endDate: new Date(2014, 11, 1, 13)
+                        },
+                        {
+                            color: 'f0f',
+                            content: 'Lunch',
+                            startDate: new Date(2014, 11, 1, 12, 30),
+                            endDate: new Date(2014, 11, 1, 14)
+                        },
+                        {
+                            color: '0af',
+                            content: 'Workshop',
+                            startDate: new Date(2014, 11, 1, 16),
+                            endDate: new Date(2014, 11, 1, 17)
+                        },
+                        {
+                            color: 'aa7',
+                            content: 'Birthday party',
+                            startDate: new Date(2014, 11, 1, 16, 30),
+                            endDate: new Date(2014, 11, 1, 19)
+                        }
+                    ],
+                    render: true,
+                    views: [dayView]
+                  }
+                );
+              }
+            );
+        </script>
+    </body>
+</html>
