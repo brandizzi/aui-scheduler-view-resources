@@ -42,6 +42,18 @@
                     },
 
                     prototype: {
+                        getColumnShimByResource: function(resource) {
+                            var resources = this.get('resources');
+                            var index = resources.indexOf(resource);
+
+                            if (0 <= index && index < this.columnShims.size()) {
+                                return this.columnShims.item(index);
+                            }
+                            else {
+                                return null;
+                            }
+                        },
+
                         plotEvents: function() {
                             var scheduler = this.get('scheduler');
                             var filterFn = this.get('filterFn');
