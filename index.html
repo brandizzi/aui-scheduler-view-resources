@@ -12,6 +12,15 @@
             YUI().use(
               'aui-scheduler',
               function(Y) {
+                var CSS_SCHEDULER_VIEW_DAY_TABLE_COL = Y.getClassName('scheduler-view', 'day', 'table', 'col');
+                var CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM = Y.getClassName('scheduler-view', 'day', 'table', 'col', 'shim');
+                var CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY = Y.getClassName('scheduler-view', 'day', 'table', 'colday');
+
+                var TPL_SCHEDULER_VIEW_DAY_TABLE_COLDAY = '<td class="' + [CSS_SCHEDULER_VIEW_DAY_TABLE_COL,
+                    CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY].join(' ') + '" data-colnumber="{colNumber}">' +
+                    '<div class="' + CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM + '">&nbsp;</div>' +
+                    '</td>';
+
                 var SchedulerResourceView = Y.Component.create({
                     NAME: 'scheduler-view-resource',
                     EXTENDS: Y.SchedulerDayView,
@@ -22,6 +31,23 @@
 
                         resources: {
                             value: ['no resource']
+                        }
+                    },
+
+                    prototype: {
+                        _valueColDaysNode: function() {
+                            var buffer = [];
+                            var colNumber = 0;
+
+                            for (var r in this.get('resources')) {
+                                buffer.push(
+                                    Y.Lang.sub(TPL_SCHEDULER_VIEW_DAY_TABLE_COLDAY, {
+                                        colNumber: colNumber++
+                                    })
+                                );
+                            }
+
+                            return Y.NodeList.create(buffer.join(''));
                         }
                     }
                 });
