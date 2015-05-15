@@ -23,6 +23,12 @@
                         resources: {
                             value: ['no resource']
                         }
+                    },
+
+                    prototype: {
+                        _valueColumnCounter: function() {
+                            return this.get('resources').length;
+                        }
                     }
                 });
 
