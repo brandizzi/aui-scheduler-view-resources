@@ -21,6 +21,13 @@
                     '<div class="' + CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM + '">&nbsp;</div>' +
                     '</td>';
 
+                var CSS_SCHEDULER_VIEW_DAY_HEADER_DAY = Y.getClassName('scheduler-view', 'day', 'header', 'day');
+                var CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST = Y.getClassName('scheduler-view', 'day', 'header', 'day', 'first');
+                var TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST = '<td class="' + [CSS_SCHEDULER_VIEW_DAY_HEADER_DAY,
+                    CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST].join(' ') + '"></td>';
+                var TPL_SCHEDULER_VIEW_DAY_HEADER_DAY = '<th class="' + CSS_SCHEDULER_VIEW_DAY_HEADER_DAY +
+                    '" data-colnumber="{colNumber}"><a href="#">&nbsp;</a></th>';
+
                 var SchedulerResourceView = Y.Component.create({
                     NAME: 'scheduler-view-resource',
                     EXTENDS: Y.SchedulerDayView,
@@ -48,6 +55,24 @@
                             for (var r in this.get('resources')) {
                                 buffer.push(
                                     Y.Lang.sub(TPL_SCHEDULER_VIEW_DAY_TABLE_COLDAY, {
+                                        colNumber: colNumber++
+                                    })
+                                );
+                            }
+
+                            return Y.NodeList.create(buffer.join(''));
+                        },
+
+                        _valueColHeaderDaysNode: function() {
+                            var buffer = [];
+                            var colNumber = 0;
+
+
+                            buffer.push(TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST);
+
+                            for (var r in this.get('resources')) {
+                                buffer.push(
+                                    Y.Lang.sub(TPL_SCHEDULER_VIEW_DAY_HEADER_DAY, {
                                         colNumber: colNumber++
                                     })
                                 );
