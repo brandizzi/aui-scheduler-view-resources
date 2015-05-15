@@ -42,6 +42,42 @@
                     },
 
                     prototype: {
+                        plotEvents: function() {
+                            var scheduler = this.get('scheduler');
+                            var filterFn = this.get('filterFn');
+                            var events = scheduler.getEventsByDay(scheduler.get('date'), true);
+                            var resources = this.get('resources');
+
+                            scheduler.flushEvents();
+
+                            var view = this;
+
+                            this.columnShims.each(function(colShimNode, i) {
+                                var plottedEvents = [];
+                                var columnEvents = Y.Array.filter(
+                                    events,
+                                    function(event) {
+                                        return event.get('resource') === resources[i];
+                                    }
+                                );
+
+                                colShimNode.empty();
+
+                                Y.Array.each(columnEvents, function(evt) {
+                                    if (filterFn.apply(view, [evt])) {
+                                        view.plotEvent(evt);
+
+                                        plottedEvents.push(evt);
+                                    }
+                                });
+
+                                view.syncEventsIntersectionUI(plottedEvents);
+                            });
+
+                            this.syncHeaderViewUI();
+                            this.syncCurrentTimeUI();
+                        },
+
                         syncDaysHeaderUI: function() {
                             var resources = this.get('resources');
 
