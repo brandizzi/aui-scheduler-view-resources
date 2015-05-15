@@ -26,6 +26,18 @@
                     },
 
                     prototype: {
+                        getColumnShimByResource: function(resource) {
+                            var resources = this.get('resources');
+                            var index = resources.indexOf(resource);
+
+                            if (0 <= index && index < this.columnShims.size()) {
+                                return this.columnShims.item(index);
+                            }
+                            else {
+                                return null;
+                            }
+                        },
+
                         getEventsFromColumnShimIndex: function(i) {
                             var resources = this.get('resources');
                             var scheduler = this.get('scheduler');
