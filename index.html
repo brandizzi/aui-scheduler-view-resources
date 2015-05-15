@@ -42,6 +42,16 @@
                     },
 
                     prototype: {
+                        syncDaysHeaderUI: function() {
+                            var resources = this.get('resources');
+
+                            this.colHeaderDaysNode.all('a').each(
+                                function(columnNode, i) {
+                                    columnNode.html(resources[i]);
+                                }
+                            );
+                        },
+
                         syncUI: function() {
                             SchedulerResourceView.superclass.syncUI.apply(this, arguments);
 
