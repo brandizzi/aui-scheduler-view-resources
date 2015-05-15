@@ -12,9 +12,19 @@
             YUI().use(
               'aui-scheduler',
               function(Y) {
+                var SchedulerResourceView = Y.Component.create({
+                    NAME: 'scheduler-view-resource',
+                    EXTENDS: Y.SchedulerDayView,
+                    ATTRS: {
+                        name: {
+                            value: 'resources'
+                        }
+                    }
+                });
+
                 var date = new Date(2014, 11, 1);
                 var eventRecorder = new Y.SchedulerEventRecorder();
-                var dayView = new Y.SchedulerDayView();
+                var resourceView = new SchedulerResourceView();
 
                 new Y.Scheduler(
                   {
@@ -48,7 +58,7 @@
                         }
                     ],
                     render: true,
-                    views: [dayView]
+                    views: [resourceView]
                   }
                 );
               }
