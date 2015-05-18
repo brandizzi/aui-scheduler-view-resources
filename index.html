@@ -26,6 +26,18 @@
                     },
 
                     prototype: {
+                        getEventsFromColumnShimIndex: function(i) {
+                            var resources = this.get('resources');
+                            var scheduler = this.get('scheduler');
+
+                            return Y.Array.filter(
+                                scheduler.getEventsByDay(scheduler.get('date'), true),
+                                function(event) {
+                                    return event.get('resource') === resources[i];
+                                }
+                            );
+                        },
+
                         syncDaysHeaderUI: function() {
                             var resources = this.get('resources');
 
