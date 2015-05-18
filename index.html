@@ -50,6 +50,14 @@
                             );
                         },
 
+                        getStartColumnShim: function(event) {
+                            return this.getColumnShimByResource(event.get('resource'));
+                        },
+
+                        getEndColumnShim: function(event) {
+                            return this.getColumnShimByResource(event.get('resource'));
+                        },
+
                         syncDaysHeaderUI: function() {
                             var resources = this.get('resources');
 
